@@ -1,5 +1,5 @@
 ReadME
-by Danny Reinheimer 
+This project is developed based on Danny Reinheimer's compiler. 
 
 
 Compile Instructions:
