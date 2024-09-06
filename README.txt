@@ -1,16 +1,15 @@
 ReadME
-This project is developed based on Danny Reinheimer's compiler. 
+This project is developed by Yuchao Su based on Danny Reinheimer's compiler. 
 
 
 Compile Instructions:
-To compiler the scanner run the following java command 
-javac Pair.java RegularExpressions.java Scan.java Scanner.java Token.java TokenNames.java
+I have prepared a script to compile and test the scanner.
+To compile and test the scanner run the following command 
+chmod +x test-run.sh
+./test-run.sh
 
-to execute the scanner run the following command in the terminal:
-java Scanner <inputFileName>
-
-An example of the scanner execution is:
-java Scanner foo.c
+That will feed all the files in test folder to the scanner. The results will be stored in the same folder.
+The script will also generate the info about current file compiling process, if it encounter some illegal input, it will throw a error msg and continue to compile next one. 
 
 The output will be the generated code with the identifiers starting with cs512
 the output file name will be the input file name appended with _gen.c so foo.c will be foo_gen.c
@@ -22,9 +21,20 @@ I created my own set of regular expressions for each of the different types of t
 When printing the output we check to see if the token is an identifier.  If it is
 and the string does not equal main then we add the string cs512 to the beginning of the identifer.
 
-One thing I had to do was manully check to see if the input string we were processing contained the value // since the code would assume it is two symbol's with value / and
-not a metaStatement.  
+//One thing I had to do was manully check to see if the input string we were processing contained the value // since the code would assume it is two symbol's with value / and
+//not a metaStatement.  
 
 I also check to see if we have reached the end of the file by looking for the character value /u001a.  this tell me that I should take the found token before it and return the value of the string minus the end of file value.
 
 The only unique data type used in my code is a Pair data type, which is just a key-value pair allowing me to return to value in one return call.
+
+Above are all the implementation of Danny. Besides these,
+
+I add the underscore as part of letter, so identifier will accept underscore.
+
+To supoport identifier scanning, the whole task is divided into three parts.
+1. According the RE, the identifier can not be a empty string. So, first thing is cheking if it is a empty string.
+2. Then check if the identifier is starting with letter(include underscore).
+3. Last, check the remain characters are letters(include underscore) or digits.
+
+To support the comment scanning, Danny was doing manually check. When I encounter '/', I will look forward to check if the next character is '/'. If it is, this whole line will be the metastatement. If it is not, '/' will be recognized as divide.
