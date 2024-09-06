@@ -90,7 +90,6 @@ public class Scan {
 			// then we no the token is the current string minus the last character
 			// to avoid erros we ignore // since it will be picked up latter
 			if(foundToken && currentToken == TokenNames.None&& !characters.contains("//")) {
-				System.out.println(lastFoundToken);
 				String tokenValue = characters.substring(0, characters.length()-1);  // gets the string minus the last char
 				lastReadChar = characters.charAt(characters.length() -1); // save the last character to use it to start from
 				useLastReadChar = true;
